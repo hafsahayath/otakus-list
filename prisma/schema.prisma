@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model AnimeList {
+  id           String      @id
+  title        String
+  watch_status WatchStatus
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @updatedAt
+  genres       String?
+  year         Int?
+  type         String?
+}
+
+enum WatchStatus {
+  IN_PROGRESS
+  NOT_STARTED
+  COMPLETED
+}
