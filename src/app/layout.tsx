@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Otaku's List",
+  description: "An Anime Watchlist application",
 };
 
 export default function RootLayout({

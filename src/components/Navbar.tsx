@@ -9,7 +9,7 @@ const Navbar = ({ children }: { children: ReactNode }) => {
         linkStyles="btn btn-ghost px-0 pl-2 normal-case text-xl hover:bg-transparent"
         href="/"
       >
-        <Image src="/otaku.png" alt="logo" width={100} height={100} />
+        <Image src="/otaku.png" alt="logo" width={100} height={100} priority />
       </DynamicLink>
       <div className="w-full">{children}</div>
       <div className="flex-none">

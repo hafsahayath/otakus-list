@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Genre, StatusValues } from "@/lib/types/jikan-search.types";
 import Synopsis from "./Synopsis";
 import { addToWatchlist, removeFromWatchlist } from "@/lib/server/actions";
+import Plus from "./PlusIcon";
+import Minus from "./MinusIcon";
 
 const Card = ({
   title,
@@ -83,23 +85,23 @@ const Card = ({
         <form className={`flex justify-end`}>
           {addedToWatchList ? (
             <button
-              className="btn btn-xs btn-outline"
+              className="btn btn-xs btn-outline gap-1"
               formAction={async () => {
                 "use server";
                 await removeFromWatchlist(id);
               }}
             >
-              - watchlist
+              <Minus /> watchlist
             </button>
           ) : (
             <button
-              className="btn btn-xs btn-outline"
+              className="btn btn-xs btn-outline gap-1"
               formAction={async () => {
                 "use server";
                 await addToWatchlist(title, id, genres, year, type);
               }}
             >
-              + watchlist
+              <Plus /> watchlist
             </button>
           )}
         </form>
