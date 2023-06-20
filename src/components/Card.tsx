@@ -72,7 +72,7 @@ const Card = ({
               <div className={`badge bg-yellow-500 badge-sm`}>{score}</div>
             ) : null}
             {type ? (
-              <div className={`badge bg-red-500 text-white badge-sm`}>
+              <div className={`badge bg-red-500 badge-sm text-white`}>
                 {type}
               </div>
             ) : null}
