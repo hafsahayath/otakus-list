@@ -1,16 +1,24 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Search = () => {
-  const [params, setParams] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const searchedAnimeName = searchParams.get("name");
+
+  const [params, setParams] = useState(searchedAnimeName || "");
+
+  useEffect(() => {
+    if (!searchedAnimeName) {
+      setParams("");
+    }
+  }, [searchedAnimeName]);
 
   const handleSubmit = () => {
     if (params) {
       router.push(`/search?name=${params}`);
-      setParams("");
     }
   };
 
