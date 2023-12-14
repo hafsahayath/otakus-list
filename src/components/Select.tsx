@@ -7,9 +7,11 @@ import {
   sendAppropriateStatus,
 } from "@/lib/utils";
 import { WatchStatus } from "@prisma/client";
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 
 const Select = ({ status, id }: { status: WatchStatus; id: string }) => {
+  const selectRef = useRef<HTMLSelectElement>(null);
+
   const [watchStatus, setWatchStatus] = useState<ClientWatchStatusValues>(
     getWatchStatusValue(status)
   );
@@ -17,6 +19,7 @@ const Select = ({ status, id }: { status: WatchStatus; id: string }) => {
 
   return (
     <select
+      ref={selectRef}
       value={watchStatus}
       onChange={(e) => {
         const statusValue = e.target.value as ClientWatchStatusValues;
@@ -24,6 +27,7 @@ const Select = ({ status, id }: { status: WatchStatus; id: string }) => {
         startTransition(() =>
           updateWatchStatus(id, sendAppropriateStatus(statusValue))
         );
+        selectRef.current && selectRef.current.blur();
       }}
       className="select select-sm w-full max-w-sm"
     >
