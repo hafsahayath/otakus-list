@@ -29,16 +29,6 @@ export function shortenString(str: string) {
   return str;
 }
 
-export const BadgeStatusColorsEnum = {
-  "Finished Airing": "badge-info",
-  "Not yet aired": "bg-base-300",
-  "Currently Airing": "badge-success",
-} as const;
-
-export const getBadgeStyles = (status: StatusValues) => {
-  return BadgeStatusColorsEnum[status];
-};
-
 export const ClientWatchStatusEnum = {
   IN_PROGRESS: "In Progress",
   NOT_STARTED: "Not Started",
