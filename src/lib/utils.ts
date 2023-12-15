@@ -1,6 +1,6 @@
-import { AnimeList } from "@prisma/client";
+import { AnimeList, WatchStatus } from "@prisma/client";
 import { TopAnimeResponse } from "./types/jikan-top.types";
-import { SearchAnimeResponse } from "./types/jikan-search.types";
+import { SearchAnimeResponse, StatusValues } from "./types/jikan-search.types";
 
 export function modifyTrendingArray(
   arrayX: TopAnimeResponse["data"] | SearchAnimeResponse["data"],
@@ -28,3 +28,33 @@ export function shortenString(str: string) {
   }
   return str;
 }
+
+export const BadgeStatusColorsEnum = {
+  "Finished Airing": "badge-info",
+  "Not yet aired": "bg-base-300",
+  "Currently Airing": "badge-success",
+} as const;
+
+export const getBadgeStyles = (status: StatusValues) => {
+  return BadgeStatusColorsEnum[status];
+};
+
+export const ClientWatchStatusEnum = {
+  IN_PROGRESS: "In Progress",
+  NOT_STARTED: "Not Started",
+  COMPLETED: "Completed",
+} as const;
+
+export type ClientWatchStatusValues =
+  (typeof ClientWatchStatusEnum)[keyof typeof ClientWatchStatusEnum];
+
+export const getWatchStatusValue = (status: WatchStatus) => {
+  return ClientWatchStatusEnum[status];
+};
+
+export const sendAppropriateStatus = (status: ClientWatchStatusValues) => {
+  const entry = Object.entries(ClientWatchStatusEnum).find(
+    ([_, value]) => value === status
+  );
+  return entry![0] as keyof typeof ClientWatchStatusEnum;
+};

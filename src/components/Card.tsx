@@ -4,6 +4,7 @@ import Synopsis from "./Synopsis";
 import { addToWatchlist, removeFromWatchlist } from "@/lib/server/actions";
 import Plus from "./PlusIcon";
 import Minus from "./MinusIcon";
+import { getBadgeStyles } from "@/lib/utils";
 
 const Card = ({
   title,
@@ -32,16 +33,6 @@ const Card = ({
 }) => {
   const genres = genre?.map((ele) => ele.name).join(", ");
   const titleWithYear = title.includes(`${year}`);
-
-  const BadgeStatusColorsEnum = {
-    "Finished Airing": "badge-info",
-    "Not yet aired": "bg-base-300",
-    "Currently Airing": "badge-success",
-  } as const;
-
-  const getBadgeStyles = (status: StatusValues) => {
-    return BadgeStatusColorsEnum[status];
-  };
 
   return (
     <div className="w-full flex border-b border-base-300 pb-4">
